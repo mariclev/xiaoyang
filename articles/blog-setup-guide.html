@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>从零配置个人博客：GitHub + Netlify 部署完整教程</title>
+<link rel="stylesheet" href="../article.css">
+</head>
+<body>
+<main class="article-page">
+<article>
+<h1>从零配置个人博客：GitHub + Netlify 部署完整教程与踩坑记录</h1>
+<p>这篇文章记录“小羊半夏的温馨小家”的完整搭建过程，包括 GitHub 管理代码、Netlify 自动部署、常见错误处理，以及如何继续扩展日记、头像和个人资料功能。</p>
+
+<h2>一、为什么搭建个人博客</h2>
+<p>相比朋友圈和临时笔记，个人博客可以长期沉淀自己的技术路线。对于嵌入式开发者来说，可以记录 STM32、FreeRTOS、传感器、电机控制、AI 工具使用经验，让别人通过搜索了解自己的能力。</p>
+
+<h2>二、准备开发环境</h2>
+<ul>
+<li>Git：管理代码版本。</li>
+<li>Node.js：运行前端工具。</li>
+<li>Netlify CLI：完成命令行部署。</li>
+</ul>
+
+<h2>三、遇到的第一个问题：node 命令无法识别</h2>
+<pre><code>node : 无法将“node”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。</code></pre>
+<p>原因通常是没有安装 Node.js，或者环境变量 PATH 没有刷新。</p>
+<p>解决方法：</p>
+<pre><code>winget install --id OpenJS.NodeJS.LTS</code></pre>
+<p>安装完成后重新打开 PowerShell：</p>
+<pre><code>node -v
+npm -v</code></pre>
+
+<h2>四、GitHub 管理博客代码</h2>
+<pre><code>git clone 仓库地址
+git pull origin main
+git status
+git push origin main</code></pre>
+<p>每一次修改都可以通过 Git 保存，方便恢复历史版本。</p>
+
+<h2>五、Netlify 部署流程</h2>
+<pre><code>netlify login
+netlify link
+netlify deploy --dir .
+netlify deploy --prod --dir .</code></pre>
+<p><code>netlify deploy</code> 用于预览测试，确认页面正常后，再使用 <code>--prod</code> 发布正式网站。</p>
+
+<h2>六、常见错误</h2>
+<h3>1. You don't appear to be in a folder that is linked to a project</h3>
+<p>说明当前目录没有绑定 Netlify 项目。进入博客根目录后执行：</p>
+<pre><code>netlify link --id 项目ID</code></pre>
+
+<h3>2. 页面更新但是浏览器还是旧内容</h3>
+<p>尝试 Ctrl + F5 强制刷新，或者清理浏览器缓存。</p>
+
+<h3>3. 图片无法显示</h3>
+<p>检查路径。Netlify 静态部署建议使用相对路径，例如：</p>
+<pre><code>assets/avatar.svg</code></pre>
+
+<h2>七、给博客增加日记和个人资料</h2>
+<p>静态博客也可以拥有简单交互功能。本网站使用 localStorage 实现：</p>
+<ul>
+<li>写日记</li>
+<li>修改头像</li>
+<li>修改说说</li>
+<li>修改个人签名</li>
+<li>导出和恢复日记备份</li>
+</ul>
+<p>这些数据保存在浏览器本地，不需要服务器和数据库，适合个人记录。</p>
+
+<h2>八、后续升级方向</h2>
+<ul>
+<li>增加 Supabase 数据库存储。</li>
+<li>增加用户登录。</li>
+<li>增加评论系统。</li>
+<li>增加访问统计。</li>
+<li>增加技术服务咨询入口。</li>
+</ul>
+
+<p>一个网站不是一次完成的作品，而是持续成长的记录。希望这个小家能够记录技术，也记录一路走来的变化。</p>
+</article>
+</main>
+</body>
+</html>
