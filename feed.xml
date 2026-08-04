@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>小羊半夏的温馨小家</title>
+    <link>https://xiaoyang-banxia.netlify.app/</link>
+    <description>嵌入式、AI 工具与技术成长记录。</description>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 04 Aug 2026 03:01:00 GMT</lastBuildDate>
+    <atom:link href="https://xiaoyang-banxia.netlify.app/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>电磁循迹小车：从传感器采集到闭环控制</title>
+      <link>https://xiaoyang-banxia.netlify.app/articles/electromagnetic-car.html</link>
+      <guid isPermaLink="true">https://xiaoyang-banxia.netlify.app/articles/electromagnetic-car.html</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+      <description>从传感器采集、偏差计算到速度反馈与闭环调试的工程思路。</description>
+    </item>
+    <item>
+      <title>Codex 安装与第一次使用</title>
+      <link>https://xiaoyang-banxia.netlify.app/articles/codex-install.html</link>
+      <guid isPermaLink="true">https://xiaoyang-banxia.netlify.app/articles/codex-install.html</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+      <description>安装 Codex CLI、登录账号、打开仓库并完成第一次 AI 辅助开发流程。</description>
+    </item>
+    <item>
+      <title>ADC 基础：模拟量如何变成数字量</title>
+      <link>https://xiaoyang-banxia.netlify.app/articles/adc-basics.html</link>
+      <guid isPermaLink="true">https://xiaoyang-banxia.netlify.app/articles/adc-basics.html</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+      <description>理解 ADC 的采样、保持、量化、分辨率和工程抗干扰。</description>
+    </item>
+    <item>
+      <title>独立看门狗：程序跑飞时的最后保障</title>
+      <link>https://xiaoyang-banxia.netlify.app/articles/iwdg-basics.html</link>
+      <guid isPermaLink="true">https://xiaoyang-banxia.netlify.app/articles/iwdg-basics.html</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+      <description>理解 IWDG 的独立时钟、超时计算、正确喂狗位置与常见错误。</description>
+    </item>
+  </channel>
+</rss>
