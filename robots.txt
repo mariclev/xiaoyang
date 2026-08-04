@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://xiaoyang.netlify.app/sitemap.xml
+Sitemap: https://xiaoyang-banxia.netlify.app/sitemap.xml
