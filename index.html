@@ -3,16 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="小羊半夏的温馨小家｜嵌入式、AI 工具与技术成长记录。分享 STM32、FreeRTOS、Codex、项目实践与学习笔记。" />
+  <meta name="description" content="小羊半夏的温馨小家｜嵌入式、AI工具与技术成长记录。分享 STM32、FreeRTOS、Codex、项目实践与学习笔记。" />
   <meta name="theme-color" content="#f4b183" />
+  <meta property="og:title" content="小羊半夏的温馨小家" />
+  <meta property="og:description" content="嵌入式 · AI工具 · 技术成长记录" />
+  <meta property="og:type" content="website" />
   <title>小羊半夏的温馨小家｜嵌入式 · AI工具 · 技术成长记录</title>
   <link rel="icon" href="assets/avatar.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="site.js" defer></script>
 </head>
 <body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
   <div class="page-shell">
     <header class="site-header">
-      <a class="brand" href="index.html" aria-label="返回首页">
+      <a class="brand" href="#home" aria-label="返回首页">
         <img src="assets/avatar.svg" alt="小羊半夏头像" />
         <span>
           <strong>小羊半夏</strong>
@@ -21,9 +28,9 @@
       </a>
       <nav aria-label="主导航">
         <a class="active" href="#home">首页</a>
-        <a href="#latest">最新文章</a>
-        <a href="#timeline">成长时间轴</a>
-        <a href="#about">关于这里</a>
+        <a href="#latest">文章</a>
+        <a href="#profile">关于我</a>
+        <a href="#timeline">成长</a>
         <a href="#contact">联系</a>
       </nav>
     </header>
@@ -34,7 +41,7 @@
           <span class="eyebrow">HELLO · 欢迎回家</span>
           <h1>小羊半夏的<br /><em>温馨小家</em></h1>
           <p class="hero-subtitle">嵌入式 · AI工具 · 技术成长记录</p>
-          <p>
+          <p class="hero-description">
             这里记录嵌入式开发、Codex 与 AI 工具的学习过程，
             也分享项目实践、踩坑经历和生活中的小小思考。
           </p>
@@ -47,10 +54,10 @@
           </div>
         </div>
         <div class="hero-card" aria-label="博客头像与简介">
-          <div class="soft-orb orb-one"></div>
-          <div class="soft-orb orb-two"></div>
+          <div class="hero-card-glow" aria-hidden="true"></div>
           <img class="hero-avatar" src="assets/avatar.svg" alt="暖色小羊头像" />
           <p>愿每一次学习，都有一点收获；<br />愿每一次记录，都能照亮后来的人。</p>
+          <span class="status-pill"><i></i> 持续学习与更新中</span>
         </div>
       </section>
 
@@ -60,41 +67,90 @@
             <span class="eyebrow">LATEST POSTS</span>
             <h2>最新文章</h2>
           </div>
-          <p>从真实项目出发，把复杂知识讲得更清楚一点。</p>
+          <p>从真实问题出发，把复杂知识讲得更清楚一点。</p>
         </div>
 
-        <div class="article-grid">
-          <article class="article-card featured">
-            <div class="card-icon">🚗</div>
+        <div class="article-tools" aria-label="文章搜索与筛选">
+          <label class="search-box" for="article-search">
+            <span aria-hidden="true">⌕</span>
+            <input id="article-search" type="search" placeholder="搜索文章，例如：ADC、Codex、看门狗" autocomplete="off" />
+          </label>
+          <div class="tag-filters" role="group" aria-label="按标签筛选">
+            <button class="tag-filter active" type="button" data-filter="all">全部</button>
+            <button class="tag-filter" type="button" data-filter="项目">项目</button>
+            <button class="tag-filter" type="button" data-filter="STM32">STM32</button>
+            <button class="tag-filter" type="button" data-filter="Codex">Codex</button>
+            <button class="tag-filter" type="button" data-filter="基础知识">基础知识</button>
+          </div>
+          <p id="search-result" class="search-result" aria-live="polite"></p>
+        </div>
+
+        <div class="article-grid" id="article-grid">
+          <article class="article-card featured" data-tags="项目 嵌入式" data-search="电磁循迹小车 传感器 编码器 PID 电机 闭环控制">
+            <div class="card-topline"><div class="card-icon">🚗</div><span class="featured-mark">推荐阅读</span></div>
             <div class="card-meta"><span>嵌入式项目</span><time datetime="2026-08-04">2026-08-04</time></div>
             <h3>电磁循迹小车：从传感器采集到闭环控制</h3>
             <p>记录电感传感器、编码器、PID 控制与赛道元素识别的完整实现思路。</p>
+            <div class="card-tags"><span>#项目</span><span>#控制</span><span>#传感器</span></div>
             <a href="articles/electromagnetic-car.html">阅读全文 <span>→</span></a>
           </article>
 
-          <article class="article-card">
-            <div class="card-icon">✨</div>
+          <article class="article-card" data-tags="Codex AI工具" data-search="Codex 安装 使用 ChatGPT 编程 AI 工具 Git 代码">
+            <div class="card-topline"><div class="card-icon">✨</div></div>
             <div class="card-meta"><span>Codex 教程</span><time datetime="2026-08-04">2026-08-04</time></div>
             <h3>Codex 安装与第一次使用</h3>
             <p>从环境准备、登录配置到让 Codex 读取并修改第一个项目。</p>
+            <div class="card-tags"><span>#Codex</span><span>#AI工具</span></div>
             <a href="articles/codex-install.html">阅读全文 <span>→</span></a>
           </article>
 
-          <article class="article-card">
-            <div class="card-icon">📈</div>
+          <article class="article-card" data-tags="STM32 基础知识" data-search="ADC 模拟量 数字量 分辨率 参考电压 采样 STM32">
+            <div class="card-topline"><div class="card-icon">📈</div></div>
             <div class="card-meta"><span>基础知识</span><time datetime="2026-08-04">2026-08-04</time></div>
             <h3>ADC 基础：模拟量如何变成数字量</h3>
             <p>理解分辨率、参考电压、采样时间以及常见的波动原因。</p>
+            <div class="card-tags"><span>#STM32</span><span>#ADC</span><span>#基础知识</span></div>
             <a href="articles/adc-basics.html">阅读全文 <span>→</span></a>
           </article>
 
-          <article class="article-card">
-            <div class="card-icon">🐕</div>
+          <article class="article-card" data-tags="STM32 基础知识" data-search="IWDG 独立看门狗 喂狗 超时 复位 STM32">
+            <div class="card-topline"><div class="card-icon">🐕</div></div>
             <div class="card-meta"><span>基础知识</span><time datetime="2026-08-04">2026-08-04</time></div>
             <h3>独立看门狗：程序跑飞时的最后保障</h3>
             <p>用通俗方式讲清 IWDG 的工作原理、超时计算与正确喂狗方式。</p>
+            <div class="card-tags"><span>#STM32</span><span>#IWDG</span><span>#基础知识</span></div>
             <a href="articles/iwdg-basics.html">阅读全文 <span>→</span></a>
           </article>
+        </div>
+        <div id="search-empty" class="search-empty" hidden>
+          <span>🐑</span>
+          <h3>暂时没有找到相关文章</h3>
+          <p>换一个关键词试试，或者等待小羊半夏继续更新。</p>
+        </div>
+      </section>
+
+      <section class="section profile-section" id="profile">
+        <div class="profile-card">
+          <div class="profile-avatar-wrap">
+            <img src="assets/avatar.svg" alt="小羊半夏头像" />
+            <span>🐑</span>
+          </div>
+          <div class="profile-main">
+            <span class="eyebrow">ABOUT ME</span>
+            <h2>你好，我是小羊半夏</h2>
+            <p>
+              一名持续学习中的嵌入式开发者。我喜欢把遇到的问题拆开、验证、记录，
+              再用更容易理解的方式分享出来。
+            </p>
+            <div class="skill-list" aria-label="关注方向">
+              <span>STM32</span><span>FreeRTOS</span><span>传感器</span><span>电机控制</span><span>Codex</span><span>AI 工作流</span>
+            </div>
+          </div>
+          <aside class="now-card">
+            <small>正在探索</small>
+            <strong>AI × 工程开发</strong>
+            <p>让工具提升效率，同时保留工程验证与独立思考。</p>
+          </aside>
         </div>
       </section>
 
@@ -113,68 +169,43 @@
             <time>2023</time>
             <div class="timeline-card">
               <span class="timeline-icon">🏎️</span>
-              <div>
-                <h3>智能车竞赛</h3>
-                <p>从真实赛道与调试问题出发，开始接触传感器、电机控制和嵌入式系统。</p>
-              </div>
+              <div><h3>智能车竞赛</h3><p>从真实赛道与调试问题出发，开始接触传感器、电机控制和嵌入式系统。</p></div>
             </div>
           </article>
-
           <article class="timeline-item">
             <div class="timeline-dot" aria-hidden="true"></div>
             <time>2024</time>
             <div class="timeline-card">
               <span class="timeline-icon">🔧</span>
-              <div>
-                <h3>STM32 项目实践</h3>
-                <p>继续学习常用外设、硬件接口和程序调试，把知识逐步落到实际项目中。</p>
-              </div>
+              <div><h3>STM32 项目实践</h3><p>继续学习常用外设、硬件接口和程序调试，把知识逐步落到实际项目中。</p></div>
             </div>
           </article>
-
           <article class="timeline-item">
             <div class="timeline-dot" aria-hidden="true"></div>
             <time>2025</time>
             <div class="timeline-card">
               <span class="timeline-icon">🧩</span>
-              <div>
-                <h3>FreeRTOS 学习</h3>
-                <p>开始理解任务调度、实时性与模块划分，尝试让复杂程序运行得更清晰稳定。</p>
-              </div>
+              <div><h3>FreeRTOS 学习</h3><p>开始理解任务调度、实时性与模块划分，尝试让复杂程序运行得更清晰稳定。</p></div>
             </div>
           </article>
-
           <article class="timeline-item current">
             <div class="timeline-dot" aria-hidden="true"></div>
             <time>2026</time>
             <div class="timeline-card">
               <span class="timeline-icon">🌱</span>
-              <div>
-                <h3>AI 与嵌入式探索</h3>
-                <p>学习使用 Codex 和 AI 工具辅助开发、整理知识，并在这里持续记录成长。</p>
-              </div>
+              <div><h3>AI 与嵌入式探索</h3><p>学习使用 Codex 和 AI 工具辅助开发、整理知识，并在这里持续记录成长。</p></div>
             </div>
           </article>
         </div>
       </section>
 
       <section class="section warm-panel" id="about">
-        <div class="about-illustration" aria-hidden="true">
-          <span>☕</span>
-          <span>💻</span>
-          <span>🌿</span>
-        </div>
+        <div class="about-illustration" aria-hidden="true"><span>☕</span><span>💻</span><span>🌿</span></div>
         <div>
           <span class="eyebrow">ABOUT THIS HOME</span>
           <h2>关于这个温馨小家</h2>
-          <p>
-            我是小羊半夏，一名持续学习中的嵌入式开发者。这里既有 STM32、FreeRTOS、
-            传感器采集与电机控制的实践笔记，也有 Codex、AI 工具和效率方法的真实体验。
-          </p>
-          <p>
-            我更愿意记录“为什么这样做”和“踩过哪些坑”，而不只是贴出最终代码。
-            希望这些内容能帮助刚开始学习的朋友少绕一点弯路。
-          </p>
+          <p>这里既有 STM32、FreeRTOS、传感器采集与电机控制的实践笔记，也有 Codex、AI 工具和效率方法的真实体验。</p>
+          <p>我更愿意记录“为什么这样做”和“踩过哪些坑”，而不只是贴出最终代码。希望这些内容能帮助刚开始学习的朋友少绕一点弯路。</p>
         </div>
       </section>
 
@@ -185,20 +216,15 @@
           <p>若有相关需求，欢迎通过邮箱或 GitHub 联系。</p>
         </div>
         <div class="contact-links">
-          <a href="mailto:2992764344@qq.com">
-            <span>✉️</span>
-            <div><small>邮箱</small><strong>2992764344@qq.com</strong></div>
-          </a>
-          <a href="https://github.com/mariclev" target="_blank" rel="noreferrer">
-            <span>⌘</span>
-            <div><small>GitHub</small><strong>@mariclev</strong></div>
-          </a>
+          <a href="mailto:2992764344@qq.com"><span>✉️</span><div><small>邮箱</small><strong>2992764344@qq.com</strong></div></a>
+          <a href="https://github.com/mariclev" target="_blank" rel="noreferrer"><span>⌘</span><div><small>GitHub</small><strong>@mariclev</strong></div></a>
         </div>
       </section>
     </main>
 
     <footer>
       <p>© 2026 小羊半夏 · 愿代码有温度，记录有回响。</p>
+      <a href="https://github.com/mariclev/xiaoyang" target="_blank" rel="noreferrer">查看网站源码</a>
     </footer>
   </div>
 </body>
