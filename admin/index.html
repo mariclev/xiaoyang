@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>小羊半夏内容管理</title>
+  <link rel="icon" href="/assets/avatar.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/admin/admin.css" />
+  <script src="/admin/admin.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a href="/">← 返回博客</a>
+    <strong>小羊半夏 · 内容管理</strong>
+    <span id="save-status">正在读取云端数据…</span>
+  </header>
+
+  <main class="shell">
+    <section class="notice">
+      <h1>GitHub 云端内容管理</h1>
+      <p>本页不会保存 GitHub 密码或访问令牌。编辑完成后下载 JSON 文件，再到 GitHub 官方页面替换对应文件并提交。Netlify 会自动发布，所有设备随后看到相同内容。</p>
+      <div class="notice-actions">
+        <a class="button" target="_blank" rel="noopener" href="https://github.com/mariclev/xiaoyang/edit/main/data/profile.json">编辑 profile.json</a>
+        <a class="button" target="_blank" rel="noopener" href="https://github.com/mariclev/xiaoyang/edit/main/data/diaries.json">编辑 diaries.json</a>
+        <a class="button secondary" target="_blank" rel="noopener" href="https://app.netlify.com/projects/xiaoyang-banxia/deploys">查看部署状态</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><small>PROFILE</small><h2>个人资料</h2></div><img id="avatar-preview" src="/assets/avatar.svg" alt="头像预览" /></div>
+      <form id="profile-form" class="form-grid">
+        <label>昵称<input id="display-name" maxlength="30" required /></label>
+        <label>头像路径或网址<input id="avatar-path" placeholder="/assets/avatar.svg" required /></label>
+        <label class="wide">说说<input id="status-input" maxlength="80" required /></label>
+        <label class="wide">签名<textarea id="signature-input" rows="4" maxlength="240" required></textarea></label>
+        <label class="wide file-row">制作新头像<input id="avatar-file" type="file" accept="image/png,image/jpeg,image/webp" /><span>选择图片后会裁剪为 512×512 WebP，并下载为 avatar.webp。再上传到仓库 assets 目录。</span></label>
+        <div class="wide actions">
+          <button class="primary" type="submit">保存草稿</button>
+          <button id="download-profile" type="button">下载 profile.json</button>
+          <button id="copy-profile" type="button">复制 JSON</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><small>DIARY</small><h2>日记管理</h2></div><strong><span id="diary-count">0</span> 篇</strong></div>
+      <form id="diary-form" class="form-grid">
+        <input id="diary-id" type="hidden" />
+        <label>日期<input id="diary-date" type="date" required /></label>
+        <label>心情<select id="diary-mood"><option>🌱</option><option>😊</option><option>💡</option><option>💻</option><option>🌧️</option><option>☕</option></select></label>
+        <label class="wide">标题<input id="diary-title" maxlength="80" required /></label>
+        <label class="wide">正文<textarea id="diary-content" rows="8" maxlength="10000" required></textarea></label>
+        <label class="check"><input id="diary-public" type="checkbox" /> 在博客首页公开显示</label>
+        <div class="wide actions">
+          <button class="primary" type="submit">保存日记草稿</button>
+          <button id="cancel-edit" type="button" hidden>取消编辑</button>
+          <button id="download-diaries" type="button">下载 diaries.json</button>
+          <button id="copy-diaries" type="button">复制 JSON</button>
+          <button id="migrate-local" type="button">迁移本机旧数据</button>
+        </div>
+      </form>
+      <div id="diary-list" class="diary-list"></div>
+    </section>
+
+    <section class="publish-guide">
+      <h2>发布步骤</h2>
+      <ol>
+        <li>在本页编辑内容并下载对应 JSON 文件。</li>
+        <li>点击顶部 GitHub 编辑按钮，登录 GitHub 后用下载文件的内容替换原内容。</li>
+        <li>点击 GitHub 页面底部的“Commit changes”。</li>
+        <li>等待 Netlify 部署完成，通常几分钟内生效。</li>
+      </ol>
+    </section>
+  </main>
+</body>
+</html>
