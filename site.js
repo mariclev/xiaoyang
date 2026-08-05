@@ -24,6 +24,50 @@ document.addEventListener('DOMContentLoaded', () => {
     return response.json();
   };
 
+  const prepareCloudUi = () => {
+    const diaryForm = document.querySelector('#diary-form');
+    const profileEditor = document.querySelector('#profile-editor');
+    const editorButton = document.querySelector('#open-profile-editor');
+    const diaryHeadingCopy = document.querySelector('#diary .section-heading > p');
+    const diaryToolbarActions = document.querySelector('.diary-toolbar > div');
+    const storageNote = document.querySelector('.storage-note');
+    const heroDiaryLink = document.querySelector('.hero-actions a[href="#diary"]');
+
+    if (diaryForm) diaryForm.hidden = true;
+    if (profileEditor) profileEditor.hidden = true;
+    if (storageNote) storageNote.hidden = true;
+
+    if (diaryHeadingCopy) {
+      diaryHeadingCopy.textContent = '公开日记由 GitHub 数据文件统一管理，并通过 Netlify 自动同步到所有设备。';
+    }
+
+    if (heroDiaryLink) heroDiaryLink.textContent = '查看公开日记';
+
+    if (editorButton) {
+      editorButton.textContent = '进入内容管理';
+      editorButton.addEventListener('click', () => {
+        window.location.href = '/admin/';
+      });
+    }
+
+    if (diaryToolbarActions) {
+      diaryToolbarActions.replaceChildren();
+      const adminLink = document.createElement('a');
+      adminLink.className = 'button ghost';
+      adminLink.href = '/admin/';
+      adminLink.textContent = '管理日记';
+      diaryToolbarActions.appendChild(adminLink);
+    }
+
+    const archive = document.querySelector('.diary-archive');
+    if (archive && !archive.querySelector('.cloud-sync-note')) {
+      const note = document.createElement('p');
+      note.className = 'storage-note cloud-sync-note';
+      note.textContent = '☁️ 云端版本：公开日记和个人资料由 GitHub 保存，Netlify 发布后多设备同步。';
+      archive.prepend(note);
+    }
+  };
+
   const applyProfile = (rawProfile) => {
     const profile = { ...DEFAULT_PROFILE, ...(rawProfile || {}) };
     const name = String(profile.displayName || DEFAULT_PROFILE.displayName).trim().slice(0, 30);
@@ -34,9 +78,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-profile-name]').forEach((node) => {
       node.textContent = name;
     });
+    const brandName = document.querySelector('.brand strong');
+    const aboutHeading = document.querySelector('.profile-main h2');
+    if (brandName) brandName.textContent = name;
+    if (aboutHeading) aboutHeading.textContent = `你好，我是${name}`;
+
     document.querySelectorAll('.user-avatar').forEach((image) => {
       image.src = avatar;
       image.alt = `${name}头像`;
+      image.addEventListener('error', () => {
+        image.src = DEFAULT_PROFILE.avatar;
+      }, { once: true });
     });
 
     const signatureNode = document.querySelector('#profile-signature');
@@ -204,5 +256,6 @@ document.addEventListener('DOMContentLoaded', () => {
   topButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   updateTopButton();
 
+  prepareCloudUi();
   Promise.allSettled([loadProfile(), loadDiaries()]);
 });
