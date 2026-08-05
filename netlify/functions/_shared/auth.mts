@@ -3,16 +3,11 @@ import { getDatabase } from "@netlify/database";
 
 const COOKIE_NAME = "xy_admin";
 const SESSION_DAYS = 7;
-const OWNER_EMAIL = "2992764344@qq.com";
-const ADMIN_HASH = [
-  "pbkdf2_sha256",
-  "210000",
-  "4491986f737b3276b2b14efddd5500ac",
-  "7ADP5a2REWXAgyiUHTXaVBhqH8Bpz1_tGj8jAwSllJY",
-].join("$");
+const FALLBACK_EMAIL = "2992764344@qq.com";
+const FALLBACK_HASH = "pbkdf2_sha256$210000$6e09f54d874874d6dd0fffa477661713$owMGXIS2Cazeo5whLY3gmd--7JKUakPOH2M_Ne--8kc";
 
 export function ownerEmail() {
-  return OWNER_EMAIL;
+  return (process.env.BLOG_OWNER_EMAIL || FALLBACK_EMAIL).trim().toLowerCase();
 }
 
 function decodeBase64Url(value: string) {
@@ -22,7 +17,8 @@ function decodeBase64Url(value: string) {
 }
 
 export function verifyPassword(password: string) {
-  const [algorithm, iterationText, salt, expectedText] = ADMIN_HASH.split("$");
+  const encoded = process.env.BLOG_ADMIN_PASSWORD_HASH || FALLBACK_HASH;
+  const [algorithm, iterationText, salt, expectedText] = encoded.split("$");
   if (algorithm !== "pbkdf2_sha256" || !iterationText || !salt || !expectedText) return false;
   const iterations = Number(iterationText);
   if (!Number.isSafeInteger(iterations) || iterations < 100000) return false;
@@ -75,7 +71,7 @@ export async function getAdmin(req: Request) {
 
 export async function requireAdmin(req: Request) {
   const admin = await getAdmin(req);
-  if (!admin) throw Object.assign(new Error("Unauthorized"), { status: 401 });
+  if (!admin) throw Object.assign(new Error("请先登录管理后台"), { status: 401 });
   return admin;
 }
 
